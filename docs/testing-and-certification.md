@@ -1,9 +1,9 @@
 # Testing and certification
 
-XenServer uses a modified Linux kernel that is similar but not identical
+Citrix Hypervisor uses a modified Linux kernel that is similar but not identical
 to the kernel distributed by a popular Linux distribution. In contrast,
-the XenServer control domain is currently based on a different
-distribution. In addition, the 32 bit XenServer control domain kernel is
+the Citrix Hypervisor control domain is currently based on a different
+distribution. In addition, the 32 bit Citrix Hypervisor control domain kernel is
 running above the 80K lines of code that are the 64 bit Xen hypervisor
 itself. While Citrix is very confident in the stability of the
 hypervisor, its presence represents a different software installation
@@ -16,7 +16,7 @@ addresses (for example **virt\_to\_phys()** as opposed to
 subtle differences in a hypervisor environment.
 
 For these reasons hardware drivers should be exposed to a set of testing
-on the XenServer control domain kernel to ensure the same level of
+on the Citrix Hypervisor control domain kernel to ensure the same level of
 confidence that exists for drivers in enterprise distribution releases.
 Similarly, userspace software that is included in supplemental packs
 must be tested comprehensively, to ensure that the assumptions it makes
@@ -27,14 +27,14 @@ The remainder of this section considers driver testing. Partners who
 wish to release supplemental packs do not only contain drivers should
 contact Citrix for advice. As a minimum, such pack authors should expect
 to comprehensively test the functionality of the software being included
-in the pack, as well as perform stress testing of the XenServer major
+in the pack, as well as perform stress testing of the Citrix Hypervisor major
 features, to ensure that none are impacted by the software in the pack.
 
 ## Testing scope
 
 Assuming the driver in question has already undergone verification
 testing on a Linux distribution very similar to the one used in the
-XenServer control domain, a subset of the verification test suite with a
+Citrix Hypervisor control domain, a subset of the verification test suite with a
 focus on representative tests is typically sufficient.
 
 Some common areas of focus are:
@@ -70,11 +70,11 @@ Some common areas of focus are:
 
 ## Running tests
 
-Since the physical device drivers run in the XenServer control domain,
+Since the physical device drivers run in the Citrix Hypervisor control domain,
 the majority of tests will also be run in the control domain. This
 allows simple re-use of existing Linux-based tests.
 
-To provide high-performance device I/O to guest domains, XenServer
+To provide high-performance device I/O to guest domains, Citrix Hypervisor
 includes synthetic device drivers for storage and networking that run in
 a guest and communicate their I/O requests with corresponding back-end
 drivers running in the control domain. The back-end drivers then issue
@@ -87,38 +87,38 @@ when run within a guest domain. However, running load-generation and
 other tests that do not require direct access to the device and/or
 driver within Linux and Windows guest domains is very valuable as such
 tests represent how the majority of load will be processed in actual
-XenServer installations.
+Citrix Hypervisor installations.
 
 When running tests in guest domains, ensure that you do so with the
-XenServer synthetic drivers installed in the guest domain. Installation
+Citrix Hypervisor synthetic drivers installed in the guest domain. Installation
 of the synthetic drivers is a manual process for some guests. See
-XenServer Help for more details.
+Citrix Hypervisor Help for more details.
 
 ## Tests that require an integrated build
 
 One of the primary goals of the DDK is to allow partners to create,
-compile, and test their drivers with XenServer without requiring a
-“back-and-forth” of components with the XenServer engineering team.
+compile, and test their drivers with Citrix Hypervisor without requiring a
+“back-and-forth” of components with the Citrix Hypervisor engineering team.
 
 However, some tests will only be possible after the driver RPMs and any
 accompanying binary RPMs have been supplied to Citrix and integrated
-into the XenServer product. Two examples are installing to, and booting
+into the Citrix Hypervisor product. Two examples are installing to, and booting
 from, Fibre Channel and iSCSI LUNs.
 
 In these cases additional coordination is required after the components
-have been provided to Citrix to provide a pre-release XenServer build
+have been provided to Citrix to provide a pre-release Citrix Hypervisor build
 with the integrated components for testing.
 
 ## Certification & support
 
 ### Drivers
 
-Citrix maintains a XenServer Hardware Compatibility List (HCL), found at
+Citrix maintains a Citrix Hypervisor Hardware Compatibility List (HCL), found at
 [hcl.vmd.citrix.com](http://hcl.vmd.citrix.com). This lists all devices
 that have been tested and confirmed to function correctly with the
-XenServer product.
+Citrix Hypervisor product.
 
-In order to be listed on the XenServer HCL, hardware vendors must
+In order to be listed on the Citrix Hypervisor HCL, hardware vendors must
 utilize the appropriate certification kit, obtainable from
 <http://www.citrix.com/ready/hcl>. The test kits contain a mix of manual
 and automated tests that are run on a host that contains the hardware to
@@ -127,7 +127,7 @@ tests. Test results are submitted to Citrix for validation, and if they
 are approved, the device is listed on the HCL within a small number of
 working days, along with a link to the supplemental pack that contains
 any necessary driver, if this has not yet been incorporated into the
-XenServer product. In general, such supplemental packs will be hosted on
+Citrix Hypervisor product. In general, such supplemental packs will be hosted on
 partner web sites, though Citrix may additionally opt to link to (or
 host) the pack on its own Knowledge Base site.
 
@@ -138,17 +138,17 @@ the networking certification tests and the storage certification tests
 must be carried out.
 
 There is no restriction on who is permitted to submit certifications to
-the XenServer HCL, for example, it is *not* the case that only the
+the Citrix Hypervisor HCL, for example, it is *not* the case that only the
 hardware vendor can submit certifications for their products. Having
 said this, Citrix strongly prefers hardware vendors to perform
 certification testing, as they are best placed to test all of their
 products' features.
 
 Once a device is listed on the HCL, Citrix will take support calls from
-customers who are using that device with XenServer. It is expected that
+customers who are using that device with Citrix Hypervisor. It is expected that
 partners who submit devices for inclusion in the HCL will collaborate
 with Citrix to provide a fix for any issue that is later found with
-XenServer which is caused by said device.
+Citrix Hypervisor which is caused by said device.
 
 ### Userspace software
 
@@ -159,12 +159,12 @@ support to their customers.
 
 The reason for this is because Citrix will not necessarily have had the
 opportunity to test a supplemental pack of a partner, and hence must
-rely on partner testing of the pack as installed on XenServer.
+rely on partner testing of the pack as installed on Citrix Hypervisor.
 Therefore, only partners who perform testing that has been agreed as
 sufficient by Citrix can ship supplemental packs. If a customer installs
 a pack that is not from an approved partner, their configuration will be
 deemed unsupported by Citrix: any issues found will need to be
-reproduced on a standard installation of XenServer, without the pack
+reproduced on a standard installation of Citrix Hypervisor, without the pack
 installed, if support is to be given.
 
 Partners who wish to produce supplemental packs that contain more than

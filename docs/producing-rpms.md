@@ -2,7 +2,7 @@
 
 In order to produce a supplemental pack that contains kernel modules
 (drivers), the DDK must be used to compile the driver(s) from their
-source code, against the XenServer kernel. This chapter describes the
+source code, against the Citrix Hypervisor kernel. This chapter describes the
 process.
 
 ## Directory structure
@@ -67,7 +67,7 @@ The following sections of the specification file affect the building of a packag
 
 ## Building the modules
 
-Each kernel module RPM must be built against against the XenServer kernel headers.
+Each kernel module RPM must be built against against the Citrix Hypervisor kernel headers.
 The example Makefile provides a `build-rpms` target that automates the build.
 The userspace RPM is also built if necessary.
 The RPMs are output into the `/root/rpmbuild/RPMS/x86_64` directory.
@@ -84,7 +84,7 @@ If the RPM does not build, it is important that the following be checked:
 -  If, for any reason, the Makefile included in the compressed tar archive needs to be heavily patched in order to work correctly with the DDK, Citrix suggests that a new version of the file be created, with the appropriate fixes, then a patch generated using the `diff` command.
     This patch can then be applied in the `%prep` section of the specification file, immediately following the `%setup` step.
 
--  If the kernel module itself fails to compile, (rather than the RPMs failing to build), it may be that the source being used is incompatible with the kernel version that is used in XenServer.
+-  If the kernel module itself fails to compile, (rather than the RPMs failing to build), it may be that the source being used is incompatible with the kernel version that is used in Citrix Hypervisor.
     In this case, the author of the driver should be contacted.
 
 ## Including driver RPMs in supplemental packs

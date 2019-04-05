@@ -1,36 +1,36 @@
 # Getting started
 
-This chapter describes how to setup a base XenServer system, running a DDK Virtual Machine (VM), for examining the examples provided in this document, and for use in the development of supplemental packs.
+This chapter describes how to setup a base Citrix Hypervisor system, running a DDK Virtual Machine (VM), for examining the examples provided in this document, and for use in the development of supplemental packs.
 Partners who wish to construct supplemental packs as part of their own build systems should consult the appropriate section, later in this document.
 
 The high-level process of setting up a DDK VM to create a supplemental pack is:
 
-1.  Obtain matching XenServer product and DDK build ISOs.
+1.  Obtain matching Citrix Hypervisor product and DDK build ISOs.
 
-1.  Install XenServer onto a host server.
+1.  Install Citrix Hypervisor onto a host server.
 
 1.  Install the XenCenter administrator console onto a Windows-based machine.
 
-1.  Use XenCenter to import the DDK onto the XenServer host as a new virtual machine.
+1.  Use XenCenter to import the DDK onto the Citrix Hypervisor host as a new virtual machine.
 
-## Installing XenServer
+## Installing Citrix Hypervisor
 
-Installing XenServer only requires booting from the CD-ROM image, and answering a few basic questions.
+Installing Citrix Hypervisor only requires booting from the CD-ROM image, and answering a few basic questions.
 After setup completes, take note of the host IP address shown, as it is required for connection from XenCenter.
 
 > **Note**
 >
-> Intel VT or AMD-V CPU support is required to run Windows guests, but is not required in order to use the DDK, nor for testing drivers in the XenServer control domain (dom0).
+> Intel VT or AMD-V CPU support is required to run Windows guests, but is not required in order to use the DDK, nor for testing drivers in the Citrix Hypervisor control domain (dom0).
 
 ## Installing XenCenter
 
-XenCenter, the XenServer administration console, must be installed on a separate Windows-based machine.
-Inserting the XenServer installation CD will run the XenCenter installer automatically.
+XenCenter, the Citrix Hypervisor administration console, must be installed on a separate Windows-based machine.
+Inserting the Citrix Hypervisor installation CD will run the XenCenter installer automatically.
 Once installed, the XenCenter console will be displayed with no servers connected.
 
-## Connect XenCenter to the XenServer host
+## Connect XenCenter to the Citrix Hypervisor host
 
-Within XenCenter select the **Server &gt; Add** menu option and supply the appropriate host name/IP address and password for the XenServer host.
+Within XenCenter select the **Server &gt; Add** menu option and supply the appropriate host name/IP address and password for the Citrix Hypervisor host.
 
 Select the newly connected host in the left-hand tree view.
 
@@ -44,7 +44,7 @@ Select the newly connected host in the left-hand tree view.
 
 -  On the **VM** menu, select the **Import** option. The VM Import Wizard is displayed.
 
--  Click **Browse** and on the **Files of type** drop-down list, select **XenServer Virtual Appliance Version 1 (ova.xml)**.
+-  Click **Browse** and on the **Files of type** drop-down list, select **Citrix Hypervisor Virtual Appliance Version 1 (ova.xml)**.
 
 -  Navigate to the DDK CD-ROM and select the ova.xml file within the DDK directory.
 
@@ -58,7 +58,7 @@ The DDK VM will be started automatically.
 
 ## Importing the DDK VM using the CLI
 
-The DDK VM can also be imported directly on the XenServer host using the xe CLI and standard Linux commands to mount the DDK ISO.
+The DDK VM can also be imported directly on the Citrix Hypervisor host using the xe CLI and standard Linux commands to mount the DDK ISO.
 
 -  Mount the DDK ISO and import the DDK VM:
 
@@ -100,7 +100,7 @@ The DDK VM is Linux-based so you are free to use other methods such as ssh to ac
 
 ## Adding Extra Packages to the DDK VM
 
-The DDK is built to be as close as possible to the XenServer control domain (Dom0).
+The DDK is built to be as close as possible to the Citrix Hypervisor control domain (Dom0).
 This means that only a small number of extra packages are present in the DDK (to enable the compilation of kernel modules) as compared to Dom0.
 In some cases, partners who wish to use the DDK as a build environment may wish to add extra packages (e.g. NIS authentication) to the DDK.
 
@@ -112,7 +112,7 @@ Package installation must therefore be carried out using the command:
 
 ## Accessing the DDK VM console from the host console
 
-The DDK VM text console can be accessed directly from the XenServer host console instead of using XenCenter.
+The DDK VM text console can be accessed directly from the Citrix Hypervisor host console instead of using XenCenter.
 Note that using this method disables access to the DDK console from XenCenter.
 
 -  While the DDK VM is shut down, disable VNC access on the VM record:
@@ -133,4 +133,4 @@ Note that using this method disables access to the DDK console from XenCenter.
 
 -  When complete, exit the xenconsole session using **CTRL-\]**
 
-For more information on using with the xe CLI please see the *XenServer Administrator's Guide*, available online.
+For more information on using with the xe CLI please see the [Citrix Hypervisor Product Documentation](https://docs.citrix.com/en-us/citrix-hypervisor/command-line-interface.html).

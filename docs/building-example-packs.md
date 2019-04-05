@@ -50,8 +50,8 @@ Where &lt;*pack*&gt; is the name of the pack.
 When the first example pack is built, a new GnuPG key pair is created.
 You will be prompted for a passphrase that must be entered whenever the
 private key is used to sign a pack. This key pair is only intended for
-developer testing. See --- for information on generating the key pair to
-use for released Supplemental packs.
+developer testing. For information on generating a key pair to
+use for released Supplemental packs, see [The GNU Privacy Handbook](https://www.gnupg.org/gph/en/manual/c14.html).
 
 To allow partners to release software that is installable in Dom0,
 Citrix requires partners provide us with the public key corresponding to

@@ -15,8 +15,8 @@ of the examples in the DDK.
 
 > **Note**
 >
-> The XenServer build into which a kernel module (driver) is installed *must* be the identical build to the DDK that was used to build the pack in which the driver is contained.
->If it is not, the resulting driver disk will not install on XenServer.
+> The Citrix Hypervisor build into which a kernel module (driver) is installed *must* be the identical build to the DDK that was used to build the pack in which the driver is contained.
+>If it is not, the resulting driver disk will not install on Citrix Hypervisor.
 
 ## Post-install scripts
 
@@ -27,9 +27,9 @@ configuration, that is specific to the pack.
 
 1.  Scripts must not start processes.
 
-1.  Scripts must not assume that XenServer is booted and running (as it
+1.  Scripts must not assume that Citrix Hypervisor is booted and running (as it
     may be that the pack is being installed as part of an initial
-    XenServer installation.
+    Citrix Hypervisor installation.
 
 1.  In the light of the previous point, if firewall rules are to be
     added using a post-install script, the script *must* execute
@@ -38,8 +38,8 @@ configuration, that is specific to the pack.
     execute `iptables-save > /etc/sysconfig/iptables`. This
     ensures that the default rules are loaded before the collection of
     existing and new rules are saved. Failure to save the existing rules
-    will mean that when a pack is installed as part of a XenServer host
-    installation, the default XenServer firewall rules will be lost.
+    will mean that when a pack is installed as part of a Citrix Hypervisor host
+    installation, the default Citrix Hypervisor firewall rules will be lost.
 
 If an RPM needs to distinguish between a running host and an
 installation environment, the following code fragment may be used:
@@ -70,9 +70,9 @@ directories:
 
 On upgrade, pack authors may wish to transfer configuration or state information from the previous installation: this section describes how such a transfer may be achieved.
 
-### Pack upgrade during a XenServer upgrade
+### Pack upgrade during a Citrix Hypervisor upgrade
 
-When a XenServer host is upgraded, the installer replaces the file system before supplemental packs are installed.
+When a Citrix Hypervisor host is upgraded, the installer replaces the file system before supplemental packs are installed.
 This affects the way individual RPMs interact with upgrades.
 To enable configuration files (or other configuration data, such as databases) to be carried over, the installer makes the file system of the previous installation (which is automatically backed-up to another partition) available to the RPM scripts.
 This is done through the `XS_PREVIOUS_INSTALLATION` environment variable.
@@ -86,11 +86,11 @@ be from the old root file system pointed to by
 For an example of how this can be done, see the `%post` script in
 `examples/userspace/helloworld-user.spec`.
 
-### Pack upgrade on an existing XenServer installation
+### Pack upgrade on an existing Citrix Hypervisor installation
 
-It is expected that on each release of XenServer, supplemental pack
+It is expected that on each release of Citrix Hypervisor, supplemental pack
 authors are likely to release new versions of their packs. However, if a
-pack author releases an update between XenServer releases, existing
+pack author releases an update between Citrix Hypervisor releases, existing
 installations of the old version of the pack would need to be upgraded.
 This upgrade path is the responsibility of the pack author, as the
 location of the configuration data of the old version is on the root
@@ -117,14 +117,14 @@ are used to produce the software that might be integrated into a
 supplemental pack. To facilitate this, pack authors are *not* required
 to make use of the Driver Development Kit VM, *if* they are producing
 packs that do *not* contain drivers (as these need to be compiled for
-the correct XenServer kernels).
+the correct Citrix Hypervisor kernels).
 
 If a pack author wishes to distribute drivers as part of a supplemental
 pack, (or a pack consisting solely of drivers, commonly known as a
 Driver Disk), then the driver(s) will need to be compiled using the DDK.
 However, there is no barrier to pack authors including the driver disks
 that are output by the DDK in their own build processes. Citrix does not
-support the compilation of drivers for XenServer in any way other than
+support the compilation of drivers for Citrix Hypervisor in any way other than
 using the DDK VM.
 
 To build a supplemental pack (but not a driver) as part of an existing
@@ -138,15 +138,15 @@ normally found in standard Linux distributions, including `tar`,
 
 > **Warning**
 >
-> When integrating these scripts as part of another build system, pack authors should bear in mind that Citrix may update these scripts as new versions of XenServer are released.
-> Pack authors should ensure that they update this package from the new version of the DDK before building packs for the new version of XenServer.
+> When integrating these scripts as part of another build system, pack authors should bear in mind that Citrix may update these scripts as new versions of Citrix Hypervisor are released.
+> Pack authors should ensure that they update this package from the new version of the DDK before building packs for the new version of Citrix Hypervisor.
 
 For pack authors who wish to produce a supplemental pack as an output of
 another build system, but who wish to include drivers, the following
 procedure should be followed:
 
 1.  Copy the driver source into a running DDK VM the corresponds to the
-    build of XenServer that the drivers will be targeted at.
+    build of Citrix Hypervisor that the drivers will be targeted at.
 
 1.  Produce driver *RPMs* (rather than a supplemental pack ISO). This
     can be achieved using the `$(RPM-FILE)` rule in the standard
@@ -161,7 +161,7 @@ procedure should be followed:
 1.  These RPMs should be provided to the non-DDK build system, for
     inclusion in the finished pack. Evidently, this process assumes that
     pack authors will be releasing new versions of their packs more
-    frequently than the XenServer kernel is changed, or that introducing
+    frequently than the Citrix Hypervisor kernel is changed, or that introducing
     new versions of RPMs into the alternative build system is more
     acceptable than introducing the DDK as the build system.
 
@@ -169,7 +169,7 @@ procedure should be followed:
 
 It is increasingly common for hardware manufacturers to produce
 components that load up-to-date firmware from the operating system that
-is running on the host machine. XenServer supports this mechanism, and
+is running on the host machine. Citrix Hypervisor supports this mechanism, and
 firmware packages should be installed to
 `/lib/firmware/updates/<kernel>`. The firmware should be packaged in an
 RPM, and included as part of a supplemental pack.
@@ -187,15 +187,15 @@ version 5, it is likely to be less confusing if the first version of the
 supplemental pack that contains this RPM is also version 5.
 
 There is no reason why, if it is simple enough, a pack should not be
-suitable for multiple releases of XenServer *provided* that it does not
+suitable for multiple releases of Citrix Hypervisor *provided* that it does not
 depend on particular versions of other tools. In practice, Citrix is of
 the opinion that packs should be re-released for each new version of
-XenServer, in order that they are also fully tested by the authors on
+Citrix Hypervisor, in order that they are also fully tested by the authors on
 that new release. If a pack author chooses to release one pack for
-multiple XenServer releases, they should ensure that the dependency
+multiple Citrix Hypervisor releases, they should ensure that the dependency
 information expressed in the metadata of the pack uses the `ge`
-comparator for the XenServer product, where the version to be compared
-against is the lowest supported version of XenServer.
+comparator for the Citrix Hypervisor product, where the version to be compared
+against is the lowest supported version of Citrix Hypervisor.
 
 ### Kernel module versioning
 
@@ -216,49 +216,49 @@ For example:
     RPM version = 1.0
     RPM build = 1
 
-| XenServer Kernel version | Kernel module RPM version | Event                                              |
-|--------------------------|---------------------------|----------------------------------------------------|
-| 2.6.18.128.1.5...        | 1.0-1                     | Initial release of pack                            |
-| 2.6.18.128.1.5...        | 1.1-1                     | Driver bug fix                                     |
-| 2.6.27.37...             | 2.0-1                     | New XenServer kernel, and new driver version       |
+| Citrix Hypervisor Kernel version | Kernel module RPM version | Event                                              |
+|----------------------------------|---------------------------|----------------------------------------------------|
+| 2.6.18.128.1.5...                | 1.0-1                     | Initial release of pack                            |
+| 2.6.18.128.1.5...                | 1.1-1                     | Driver bug fix                                     |
+| 3.0.0...                         | 2.0-1                     | New Citrix Hypervisor kernel, and new driver version       |
 
 Therefore, if a supplemental pack contains a driver, it will be
 necessary to rebuild that driver for each update and major release of
-XenServer. Note that hotfixes do not normally change the kernel version,
-and hence the same driver can be used until a XenServer update ("service
+Citrix Hypervisor. Note that hotfixes do not normally change the kernel version,
+and hence the same driver can be used until a Citrix Hypervisor update ("service
 pack") is released.
 
 As a general rule, if a pack contains only a single driver, it is
 strongly recommended that the version numbering of the pack be the same
 as that of the driver.
 
-## Packages compiled by, but not in, XenServer
+## Packages compiled by, but not in, Citrix Hypervisor
 
-Some of the packages that are included in the XenServer control domain
+Some of the packages that are included in the Citrix Hypervisor control domain
 are taken directly from the base Linux distribution, whilst others are
 modified and re-compiled by Citrix. In some cases, certain source RPMs,
 when compiled, result in more than one binary RPM. There exist a variety
-of packages where XenServer includes some, but not all, of the resulting
+of packages where Citrix Hypervisor includes some, but not all, of the resulting
 binaries; for example, the `net-snmp` package results in the binary
 packages `net-snmp` and `net-snmp-utils`, but `net-snmp-utils` is not
 included in dom0.
 
 If a supplemental pack author wishes to include a binary package that
 falls into this category, that binary package will need to have the
-correct build number for the version of XenServer it is to be installed
+correct build number for the version of Citrix Hypervisor it is to be installed
 upon. Because Citrix re-compiles these packages, their build numbers
-will have a XenServer-specific build number extension. Therefore, pack
+will have a Citrix Hypervisor-specific build number extension. Therefore, pack
 authors will need to obtain these binary RPMs from Citrix.
 
 To enable this process to be as simple as possible, Citrix produces an
-extra ISO (`binpkg.iso`) for each release of XenServer that contains all
+extra ISO (`binpkg.iso`) for each release of Citrix Hypervisor that contains all
 the packages that fall into this category. Partners should contact
 Citrix to obtain this ISO.
 
-## Requirements for submission of drivers for inclusion in XenServer
+## Requirements for submission of drivers for inclusion in Citrix Hypervisor
 
 Citrix encourages hardware vendors to submit any driver disks released
-for XenServer to Citrix in order that the drivers may be incorporated
+for Citrix Hypervisor to Citrix in order that the drivers may be incorporated
 into the next release of the product. In order to make this process as
 simple as possible, vendors are requested to take note of the following
 requirements:
@@ -274,7 +274,7 @@ requirements:
 1.  If a new, (rather than an update to an existing) driver is being
     submitted, Citrix will review it in order to confirm that it is
     compatible with the current support statements made concerning
-    XenServer. It may be that a driver is rejected because it is
+    Citrix Hypervisor. It may be that a driver is rejected because it is
     monolithic, or enables a feature which is not currently officially
     supported. This may also be the case with radical changes made to
     drivers that are already in the product. Partners who consider that
@@ -288,7 +288,7 @@ requirements:
     being required, which then need to be integrated into the product.
 
 1.  Certain drivers are deemed critical to automated testing by Citrix
-    of XenServer. Any (entire-driver) updates to these drivers must be
+    of Citrix Hypervisor. Any (entire-driver) updates to these drivers must be
     provided a minimum of 6 weeks prior to the beta RTM date of the
     release in which they are to be included. Partners whose drivers are
     on this list will be informed of this constraint.
@@ -325,16 +325,16 @@ requirements:
     ASCI Armor) and create a ticket on [Citrix Issue
     Tracker](http://tracker.citrix.com/) to include it in the inbox.
 
-## Does XenServer already include a driver for my device?
+## Does Citrix Hypervisor already include a driver for my device?
 
-XenServer includes a wide variety of drivers, including many that are
+Citrix Hypervisor includes a wide variety of drivers, including many that are
 distributed (inbox) with the kernel that dom0 is based upon. It may
-therefore be the case that XenServer includes a driver that enables a
-device that is not present on the XenServer Hardware Compatibility List
+therefore be the case that Citrix Hypervisor includes a driver that enables a
+device that is not present on the Citrix Hypervisor Hardware Compatibility List
 (HCL). This is particularly the case where a device is sold by multiple
 companies, each of which refers to it with a different name.
 
-Because each driver included in XenServer includes information
+Because each driver included in Citrix Hypervisor includes information
 concerning which PCI device IDs it claims, the simplest way to ascertain
 whether a device is supported is to first find its device ID.
 
@@ -347,10 +347,10 @@ If only the name of the device is known, use the PCI ID database
 (<http://pciids.sourceforge.net/pci.ids>) to ascertain what the ID of
 the device is. This database will also provide alternate names for the
 device, which may of use if the exact name is not listed in the
-XenServer HCL.
+Citrix Hypervisor HCL.
 
 If the an alternate name for the device is not found on the HCL, then
-either the device has not been tested on XenServer, or a driver for it
-is not included in XenServer. To confirm whether a suitable driver is
-included, consult the list of PCI IDs the XenServer kernel supports,
+either the device has not been tested on Citrix Hypervisor, or a driver for it
+is not included in Citrix Hypervisor. To confirm whether a suitable driver is
+included, consult the list of PCI IDs the Citrix Hypervisor kernel supports,
 found in `/lib/modules/<version>/modules.pcimap`.

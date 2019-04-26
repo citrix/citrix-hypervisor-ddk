@@ -1,22 +1,21 @@
 # Installing supplemental packs
 
-You can install a supplemental pack at the same time as installing XenServer or you can install a supplemental pack on a running XenServer instance.
+You can install a supplemental pack at the same time as installing Citrix Hypervisor or you can install a supplemental pack on a running Citrix Hypervisor instance.
 
 ## At installation time
 
-You can install supplemental packs while installing XenServer on a host in one of two ways:
+You can install supplemental packs while installing Citrix Hypervisor on a host in one of two ways:
 
 1.  From a CD – during an interactive installation from local media you will be asked if you want to install any supplemental packs.
     Any number of packs can be installed in succession.
 
 1.  From a Network repository – a HTTP, FTP or NFS repository can be expanded to include one or more supplemental packs.
-    See the XenServer Installation Guide for instructions on how to extract a supplemental pack to a directory.
 
-If a driver needs to be loaded from a supplemental pack before the XenServer installation can proceed (for example, to support a new RAID
+If a driver needs to be loaded from a supplemental pack before the Citrix Hypervisor installation can proceed (for example, to support a new RAID
 controller), the user should press the F9 key when prompted by the installer.
 The media containing the supplemental pack/driver disk can then be provided, and the installer will attempt to load the new driver.
 
-The XenServer installer will allow the user to choose to verify a pack before it is installed.
+The Citrix Hypervisor installer will allow the user to choose to verify a pack before it is installed.
 The installer will check the contents of the pack against internal checksums produced when the pack was created.
 
 ## On a running host
@@ -28,7 +27,7 @@ Install a supplemental pack by using XenCenter or the xe CLI.
 To install a supplemental pack using XenCenter:
 
 1.  Download the supplemental pack (`filename.iso`) to a known location on your computer.
-    Supplemental packs are available to download from the XenServer downloads page.
+    Supplemental packs are available to download from the Citrix Hypervisor downloads page.
 
 1.  From the XenCenter menu, select **Tools** and then **Install Update**.
 
@@ -36,7 +35,7 @@ To install a supplemental pack using XenCenter:
 
 1.  On the **Select Update** page, click **Add** to add the supplemental pack.
 
-1.  On the **Select Servers** page, select the XenServer host or the pool to which you would like to apply the supplemental pack and then click **Next**.
+1.  On the **Select Servers** page, select the Citrix Hypervisor host or the pool to which you would like to apply the supplemental pack and then click **Next**.
     This uploads the supplemental pack to the host or the pool’s default SR.
 
     > **Note**
@@ -76,7 +75,7 @@ A Supplemental Pack can be installed remotely using the xe CLI.
 
          xe update-apply uuid=<pack_uuid>
 
-    A pack can also be installed on the XenServer host by running the following command:
+    A pack can also be installed on the Citrix Hypervisor host by running the following command:
 
          xe-install-supplemental-pack <pack.iso>
 
@@ -96,12 +95,12 @@ A Supplemental Pack can be installed remotely using the xe CLI.
 
 ## Driver-specific considerations
 
-The XenServer installer, when booted, loads kernel modules that are appropriate to the hardware it has detected.
+The Citrix Hypervisor installer, when booted, loads kernel modules that are appropriate to the hardware it has detected.
 If the newer version of a driver is needed in order for the installation to proceed, then the installer version of the module must be unloaded, and the new driver
 loaded from a supplemental pack/driver disk.
 The procedure for this is as follows:
 
-1.  Reboot the host, leaving the XenServer installation CD-ROM in the drive.
+1.  Reboot the host, leaving the Citrix Hypervisor installation CD-ROM in the drive.
 
 1.  At the `boot:` prompt, type:
 

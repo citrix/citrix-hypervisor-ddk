@@ -1,10 +1,10 @@
 # Creating a supplemental pack
 
 Supplemental packs can be created containing existing RPMs provided they meet the requirements given below.
-If standard packages that are not shipped in XenServer are to be included, these should be from the appropriate CentOS distribution that the XenServer dom0 is based upon.
-In XenServer 7.3, this is CentOS 7.2. Alternatively, components can packaged as RPMs using a custom spec file.
+If standard packages that are not shipped in Citrix Hypervisor are to be included, these should be from the appropriate CentOS distribution that the Citrix Hypervisor dom0 is based upon.
+In Citrix Hypervisor 8.0, this is CentOS 7.5. Alternatively, components can packaged as RPMs using a custom spec file.
 
-If a pack will only contain drivers, it is normally known as a XenServer Driver Disk.
+If a pack will only contain drivers, it is normally known as a Citrix Hypervisor Driver Disk.
 However, the mechanisms used to build and install a driver disk are the same as for any other supplemental pack.
 One key point is that for drivers, the source code must be provided to the DDK, in order that the drivers be compiled for the correct kernels.
 For other pack components, no such compilation is necessary.
@@ -31,7 +31,7 @@ Basic details concerning the pack authoring organization, name, and version numb
 
 ### Declaring Pack dependencies
 
-Supplemental Packs should describe the version of XenServer to which they are compatible. This is done using the `--base-requires` switch:
+Supplemental Packs should describe the version of Citrix Hypervisor to which they are compatible. This is done using the `--base-requires` switch:
 
      --base-requires “product-version=x.x.x”
 
@@ -46,7 +46,7 @@ As an illustration of how `build-update` works, pack authors can create an examp
 The pack metadata is then created, using the script.
 
     build-update --uuid 3fbce6cf-5cd2-4d32-9602-e8122c562169 --label example pack --version 1.0.0 \
-    --description "An Example Pack" --base-requires "product version=7.3.0" \
+    --description "An Example Pack" --base-requires "product version=8.0.0" \
     --key "Example Updates (update) <example@example.com>" --keyfile /root/RPM-GPG-KEY-XS-DDK-TEST \
     -o example.iso *.rpm
 
@@ -54,7 +54,7 @@ A CD image should then be made from the contents of this directory.
 
 ## Adding files to Server Status Reports
 
-XenServer provides a convenient mechanism for users to collect a variety of debugging information when opening a support case, known as a Server Status Report in XenCenter, or `xen-bugtool` on the CLI.
+Citrix Hypervisor provides a convenient mechanism for users to collect a variety of debugging information when opening a support case, known as a Server Status Report in XenCenter, or `xen-bugtool` on the CLI.
 To aid partners in supporting their supplemental packs, it is recommended that pack authors add to the list of files collected as part of these Status Reports, using the method outlined below.
 
 Server Status Reports can include not only files, such as logs, but also the outputs of any normal scripts or commands that are run in the control domain (dom0).
@@ -168,20 +168,20 @@ The data to be collected as part of this category should be specified by one or 
 At present, XenCenter displays any new categories that are added by supplemental packs, but does not provide a mechanism for pack authors to give descriptions of them in the Server Status Report dialogue.
 Pack authors should therefore ensure that any new categories have suitably descriptive names.
 
-## Automating pack installation at XenServer installation time
+## Automating pack installation at Citrix Hypervisor installation time
 
-If a partner has obtained the necessary agreement from Citrix to distribute XenServer, it is possible to create a modified installation ISO that contains the XenServer installation files, plus one or more supplemental packs.
-This allows a partner to distribute a single ISO that can seamlessly install XenServer and the supplemental pack(s).
+If a partner has obtained the necessary agreement from Citrix to distribute Citrix Hypervisor, it is possible to create a modified installation ISO that contains the Citrix Hypervisor installation files, plus one or more supplemental packs.
+This allows a partner to distribute a single ISO that can seamlessly install Citrix Hypervisor and the supplemental pack(s).
 There are two steps to this process: the first involves combining the installation ISO with the pack ISO; the second requires an answerfile to be created.
 
-### Including an answerfile on the XenServer installation ISO
+### Including an answerfile on the Citrix Hypervisor installation ISO
 
-Answerfiles allow the responses to all the questions posed by the XenServer installer to be specified in an XML file, rather than needing to run the installer in interactive mode.
-The XenServer DDK includes a script to add an answerfile to the XenServer main installation ISO, to allow installation to be carried out in an unattended fashion.
+Answerfiles allow the responses to all the questions posed by the Citrix Hypervisor installer to be specified in an XML file, rather than needing to run the installer in interactive mode.
+The Citrix Hypervisor DDK includes a script to add an answerfile to the Citrix Hypervisor main installation ISO, to allow installation to be carried out in an unattended fashion.
 The `/usr/local/bin/rebuild-iso.sh` script can be used within the DDK (though the default root disk size within the DDK is unlikely to be sufficient to perform the necessary ISO re-packing operations, and hence network storage is recommended).
 Alternatively, the script, plus `/usr/local/bin/rebuild.functions`, can be copied to an external machine that has `mkisofs` installed, and used there.
 
-The `rebuild-iso.sh` script takes in the XenServer installation ISO, plus the files to be added to it, and outputs a combined ISO. Its syntax is:
+The `rebuild-iso.sh` script takes in the Citrix Hypervisor installation ISO, plus the files to be added to it, and outputs a combined ISO. Its syntax is:
 
     rebuild-iso.sh
            [--answerfile=<answerfile>]
@@ -189,8 +189,8 @@ The `rebuild-iso.sh` script takes in the XenServer installation ISO, plus the fi
            [--label=<ISOLabel>]
            inputFile.iso outputFile.iso
 
-The &lt;*answerfile*&gt; must be a valid XenServer automated installation file.
-Details of the syntax of this file are given in the relevant section of the XenServer Installation Guide.
+The &lt;*answerfile*&gt; must be a valid Citrix Hypervisor automated installation file.
+Details of the syntax of this file are given in the relevant section of the [Citrix Hypervisor Product Documentation](https://docs.citrix.com/en-us/citrix-hypervisor/install/network-boot.html).
 As part of an answerfile, it is possible to specify scripts that may be run directly after the installation completes.
 Whilst such scripts can be on a web server, it is also possible to place them on the ISO, with the answerfile.
 The `--include` switch allows such files to be added to the ISO output by `rebuild-iso.sh`. Finally, the `--label` switch controls what the volume label of the resulting ISO should be.
@@ -203,4 +203,4 @@ automated installation, all repositories specified in the
 `XS-REPOSITORY-LIST` file are installed. Therefore, provided that all
 supplemental packs that are to be installed are included in the
 `XS-REPOSITORY-LIST` file, they will be installed automatically directly
-following the installation of XenServer itself.
+following the installation of Citrix Hypervisor itself.

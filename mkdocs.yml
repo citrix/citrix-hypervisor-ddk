@@ -1,8 +1,9 @@
 site_name: Citrix Hypervisor Supplemental Packs and the DDK Guide
 site_description: Citrix Hypervisor Supplemental Packs and the DDK Guide
 site_title: Developer Documentation
+site_url: https://developer-docs.citrix.com/
 
-copyright: 'Copyright &copy; 1999-2019 Citrix Systems, Inc. All rights reserved. '
+copyright: 'Copyright &copy; 1999-2020 Citrix Systems, Inc. All rights reserved. '
 
 extra_css:
   - 'assets/stylesheets/extra.css'
@@ -51,3 +52,4 @@ nav:
 - Rules and Guidelines: rules-and-guidelines.md
 - Testing and Certification: testing-and-certification.md
 - Additional Resources: additional-resources.md
+- Questions?: https://discussions.citrix.com/forum/1385-citrix-developer-exchange/

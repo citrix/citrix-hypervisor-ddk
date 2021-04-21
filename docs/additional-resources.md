@@ -34,21 +34,27 @@ API plug-ins to drive new menu items, this feature can be used by
 partners to integrate features from their supplemental packs into one
 centralized management interface for Citrix Hypervisor.
 
-For further information, please see
-<http://community.citrix.com/display/xs/XenCenter+Plugins>.
+To learn how to create plug-ins for XenCenter, see the samples and accompanying
+documentation in the [XenCenter Plug-in Specification and Examples](https://github.com/xenserver/xencenter-samples)
+repository. The [Citrix XenCenter Plug-in Specification Guide](https://developer-docs.citrix.com/projects/xencenter-plugin-specification/en/latest/)
+is available on the [Developer Documentation site](https://developer-docs.citrix.com/).
 
 ## Citrix Hypervisor SDK
 
-The Citrix Hypervisor SDK VM is a virtual machine appliance, ready to be
-imported into a Citrix Hypervisor host. It contains the complete set of
-Citrix Hypervisor SDKs, plus a complete Linux-based development environment.
-Language bindings are available for C, C\#, Python, and Java, and a
-Windows PowerShell snap-in is also available. The SDK VM allows partners
-to easily develop solutions that utilize the rich API exposed by all
-Citrix Hypervisor hosts. The SDK VM is intended only as a convenient development
-environment: for an application developed against the appropriate
-language bindings to be distributed, only the relevant bindings are
-required (*not* the entire SDK VM).
+The Xen API is a Remote Procedure Call (RPC) based API providing programmatic
+access to the extensive set of Citrix Hypervisor management features and tools.
+Although it is possible to write applications that use the API directly through
+raw RPC calls, the task of developing third-party applications is greatly
+simplified by using language bindings exposing the individual API calls as
+first-class functions in the target language. The Citrix Hypervisor SDK provides
+language bindings for the C, C#, Java, Python, and PowerShell programming languages.
 
-For further information, please see
-<http://community.citrix.com/display/xs/Download+SDKs>.
+The Citrix Hypervisor SDK is shipped as a set of compiled libraries and source
+code, which include a class for every API class and a method for each API call.
+The libraries are accompanied by a number of test programs that can be used as
+pedagogical examples. The Citrix Hypervisor SDK can be downloaded from
+<https://www.citrix.com/downloads/citrix-hypervisor/>.
+
+The [Citrix Hypervisor Management API Reference](https://developer-docs.citrix.com/projects/citrix-hypervisor-management-api/en/latest/)
+and the [Citrix Hypervisor Software Development Kit Guide](https://developer-docs.citrix.com/projects/citrix-hypervisor-sdk/en/latest/)
+are available on the [Developer Documentation site](https://developer-docs.citrix.com/).

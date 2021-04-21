@@ -85,5 +85,5 @@ The reasons for this stipulation are:
 
 Partners often ask whether supplemental packs can include heavy-weight software, such as the Java runtime environment, or a web server.
 This type of component is not suitable for inclusion in dom0, and should instead be placed in an appliance VM.
-In many cases, the functionality that is desired can be achieved using such an appliance VM, in conjunction with the Xen API.
+In many cases, the functionality that is desired can be achieved using such an appliance VM, in conjunction with the Citrix Hypervisor Management API (Xen API).
 Citrix can provide advice to partners in such cases.
